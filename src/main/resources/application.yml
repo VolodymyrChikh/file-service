@@ -1,0 +1,46 @@
+accounts:
+  defaults:
+    role: ROLE_USER
+
+security:
+  allowed-origins: ${ALLOWED_ORIGINS}
+  jwt:
+    secret: ${JWT_SECRET}
+    cookie: jwtSession
+    expiration: 600000000
+    cookie-expiration: 600000
+server:
+  port: 8899
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  flyway:
+    url: ${DB_URL}
+    user: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    default-schema: public
+  cloud:
+    azure:
+      storage:
+        blob:
+          account-name: ${AZURE_ACCOUNT_NAME}
+          account-key: ${AZURE_ACCOUNT_KEY}
+          endpoint: ${AZURE_ENDPOINT}
+          container-name: ${AZURE_CONTAINER}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+cloud:
+  blob:
+    sas:
+      accessDuration: 900
+scheduling:
+  file:
+    operation:
+      delete:
+        time: 30
+        #Every midnight
+        interval: 0 0 0 * * *
